@@ -5,6 +5,7 @@ import HomePage from '../pages/HomePage';
 import AboutPage from '../pages/AboutPage';
 import LoginPage from '../features/auth/LoginPage';
 import RegisterPage from '../features/auth/RegisterPage';
+import NotFoundPage from '../pages/NotFoundPage';
 
 const AppRoutes = () => {
   return (
@@ -12,6 +13,7 @@ const AppRoutes = () => {
       <Route element={<MainLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Route>
 
       <Route element={<AuthLayout />}>
