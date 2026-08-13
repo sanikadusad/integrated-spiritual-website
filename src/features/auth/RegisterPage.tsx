@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Input from '@/components/Input/Input';
 import { registerUser } from './authService';
-import { useAuth } from '@/hooks/useAuth';
+import { isValidEmail, validatePassword } from '@/utils/validators';
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -12,7 +12,6 @@ const RegisterPage = () => {
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -20,6 +19,17 @@ const RegisterPage = () => {
 
     if (!name || !email || !password || !confirmPassword) {
       setError('Please fill in all fields.');
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+      setError(passwordError);
       return;
     }
 
