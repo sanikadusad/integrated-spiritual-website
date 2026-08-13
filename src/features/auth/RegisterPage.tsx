@@ -42,8 +42,8 @@ const RegisterPage = () => {
     setIsSubmitting(true);
 
     try {
-      await registerUser({ name, email, password });
-      navigate('/login');
+      const data = await registerUser({ name, email, password });
+      navigate('/verify-email', { state: { email: data.email } });
     } catch (err: any) {
       const message = err.response?.data?.error || 'Registration failed. Please try again.';
       setError(message);

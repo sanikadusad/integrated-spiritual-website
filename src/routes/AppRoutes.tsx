@@ -10,6 +10,7 @@ import DashboardPage from '../features/dashboard/DashboardPage';
 import AdminDashboardPage from '../features/dashboard/admin/AdminDashboardPage';
 import MentorDashboardPage from '../features/dashboard/mentor/MentorDashboardPage';
 import NotFoundPage from '../pages/NotFoundPage';
+import VerifyEmailPage from '../features/auth/VerifyEmailPage';
 
 const AppRoutes = () => {
   return (
@@ -36,8 +37,11 @@ const AppRoutes = () => {
       <Route element={<AuthLayout />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/verify-email" element={<VerifyEmailPage />} />
       </Route>
     </Routes>
+
+    
   );
 };
 

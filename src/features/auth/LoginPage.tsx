@@ -29,6 +29,10 @@ const LoginPage = () => {
       login(data.user, data.token);
       navigate('/');
     } catch (err: any) {
+      if (err.response?.data?.unverified) {
+        navigate('/verify-email', { state: { email } });
+        return;
+      }
       const message = err.response?.data?.error || 'Login failed. Please try again.';
       setError(message);
     } finally {
