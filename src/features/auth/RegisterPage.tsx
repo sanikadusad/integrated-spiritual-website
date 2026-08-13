@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Input from '../../components/Input/Input';
+import { Link, useNavigate } from 'react-router-dom';
+import Input from '@/components/Input/Input';
+import { registerUser } from './authService';
+import { useAuth } from '@/hooks/useAuth';
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -8,8 +10,12 @@ const RegisterPage = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!name || !email || !password || !confirmPassword) {
@@ -23,7 +29,17 @@ const RegisterPage = () => {
     }
 
     setError('');
-    console.log('Submitting registration:', { name, email, password });
+    setIsSubmitting(true);
+
+    try {
+      await registerUser({ name, email, password });
+      navigate('/login');
+    } catch (err: any) {
+      const message = err.response?.data?.error || 'Registration failed. Please try again.';
+      setError(message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -31,41 +47,16 @@ const RegisterPage = () => {
       <h1>Register</h1>
 
       <form onSubmit={handleSubmit}>
-        <Input
-          label="Name"
-          id="name"
-          type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        <Input label="Name" id="name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
+        <Input label="Email" id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <Input label="Password" id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <Input label="Confirm Password" id="confirmPassword" type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
 
-        <Input
-          label="Email"
-          id="email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        {error && <p className="error-text">{error}</p>}
 
-        <Input
-          label="Password"
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-
-        <Input
-          label="Confirm Password"
-          id="confirmPassword"
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-
-{error && <p className="error-text">{error}</p>}
-
-        <button type="submit">Register</button>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Creating account...' : 'Register'}
+        </button>
       </form>
 
       <p>Already have an account? <Link to="/login">Login</Link></p>
