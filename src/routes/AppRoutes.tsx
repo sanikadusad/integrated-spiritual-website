@@ -7,6 +7,7 @@ import AboutPage from '../pages/AboutPage';
 import LoginPage from '../features/auth/LoginPage';
 import RegisterPage from '../features/auth/RegisterPage';
 import DashboardPage from '../features/dashboard/DashboardPage';
+import AdminDashboardPage from '../features/dashboard/admin/AdminDashboardPage';
 import NotFoundPage from '../pages/NotFoundPage';
 
 const AppRoutes = () => {
@@ -18,6 +19,10 @@ const AppRoutes = () => {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<DashboardPage />} />
+        </Route>
+
+        <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+          <Route path="/admin" element={<AdminDashboardPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />
