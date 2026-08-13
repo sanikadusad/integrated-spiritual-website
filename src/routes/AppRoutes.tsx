@@ -8,6 +8,7 @@ import LoginPage from '../features/auth/LoginPage';
 import RegisterPage from '../features/auth/RegisterPage';
 import DashboardPage from '../features/dashboard/DashboardPage';
 import AdminDashboardPage from '../features/dashboard/admin/AdminDashboardPage';
+import MentorDashboardPage from '../features/dashboard/mentor/MentorDashboardPage';
 import NotFoundPage from '../pages/NotFoundPage';
 
 const AppRoutes = () => {
@@ -23,6 +24,10 @@ const AppRoutes = () => {
 
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
           <Route path="/admin" element={<AdminDashboardPage />} />
+        </Route>
+
+        <Route element={<ProtectedRoute allowedRoles={['mentor']} />}>
+          <Route path="/mentor" element={<MentorDashboardPage />} />
         </Route>
 
         <Route path="*" element={<NotFoundPage />} />
