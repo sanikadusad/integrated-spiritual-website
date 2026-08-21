@@ -1,12 +1,12 @@
 :root {
-  /* Color palette — calm, earthy tones fitting a spiritual platform */
-  --color-primary: #4a6b57;
-  --color-primary-dark: #35503f;
-  --color-secondary: #d9a441;
-  --color-background: #faf8f3;
-  --color-text: #2b2b2b;
-  --color-text-muted: #6b6b6b;
-  --color-border: #e0ddd3;
+  /* Color palette — warm gold/cream, from Figma */
+  --color-primary: #c99a24;
+  --color-primary-dark: #a67f1c;
+  --color-secondary: #4a3827;
+  --color-background: #fffdf9;
+  --color-text: #3f3328;
+  --color-text-muted: #6b5a48;
+  --color-border: #d8d1c4;
   --color-error: #b3413d;
 
   /* Spacing scale */
@@ -17,7 +17,8 @@
   --spacing-xl: 40px;
 
   /* Typography */
-  --font-family-base: 'Segoe UI', system-ui, sans-serif;
+  --font-family-base: 'Inter', system-ui, sans-serif;
+  --font-family-heading: 'Playfair Display', serif;
   --font-size-base: 16px;
 }
 
@@ -33,6 +34,10 @@ body {
   background-color: var(--color-background);
   color: var(--color-text);
   line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-family-heading);
 }
 
 a {

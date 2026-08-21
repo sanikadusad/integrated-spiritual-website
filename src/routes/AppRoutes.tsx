@@ -11,35 +11,39 @@ import AdminDashboardPage from '../features/dashboard/admin/AdminDashboardPage';
 import MentorDashboardPage from '../features/dashboard/mentor/MentorDashboardPage';
 import NotFoundPage from '../pages/NotFoundPage';
 import VerifyEmailPage from '../features/auth/VerifyEmailPage';
+import ForgotPasswordPage from '../features/auth/ForgotPasswordPage';
+import ResetPasswordPage from '../features/auth/ResetPasswordPage';
+
 
 const AppRoutes = () => {
   return (
     <Routes>
-      <Route element={<MainLayout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
+  <Route element={<MainLayout />}>
+    <Route path="/" element={<HomePage />} />
+    <Route path="/about" element={<AboutPage />} />
 
-        <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<DashboardPage />} />
-        </Route>
+    <Route element={<ProtectedRoute />}>
+      <Route path="/dashboard" element={<DashboardPage />} />
+    </Route>
+    <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
+      <Route path="/admin" element={<AdminDashboardPage />} />
+    </Route>
+    <Route element={<ProtectedRoute allowedRoles={['mentor']} />}>
+      <Route path="/mentor" element={<MentorDashboardPage />} />
+    </Route>
 
-        <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-          <Route path="/admin" element={<AdminDashboardPage />} />
-        </Route>
+    <Route path="*" element={<NotFoundPage />} />
+  </Route>
 
-        <Route element={<ProtectedRoute allowedRoles={['mentor']} />}>
-          <Route path="/mentor" element={<MentorDashboardPage />} />
-        </Route>
-
-        <Route path="*" element={<NotFoundPage />} />
-      </Route>
-
-      <Route element={<AuthLayout />}>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/verify-email" element={<VerifyEmailPage />} />
-      </Route>
-    </Routes>
+  <Route path="/login" element={<LoginPage />} />
+  <Route path="/register" element={<RegisterPage />} />
+  <Route element={<AuthLayout />}>
+    
+    <Route path="/verify-email" element={<VerifyEmailPage />} />
+    <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+    <Route path="/reset-password" element={<ResetPasswordPage />} />
+  </Route>
+</Routes>
 
     
   );

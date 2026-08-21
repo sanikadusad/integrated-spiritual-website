@@ -16,6 +16,11 @@ interface VerifyOtpPayload {
   code: string;
 }
 
+interface ResetPasswordPayload {
+  token: string;
+  newPassword: string;
+}
+
 export const registerUser = async (payload: RegisterPayload) => {
   const response = await axiosInstance.post('/auth/register', payload);
   return response.data;
@@ -33,5 +38,15 @@ export const verifyOtp = async (payload: VerifyOtpPayload) => {
 
 export const resendOtp = async (email: string) => {
   const response = await axiosInstance.post('/auth/resend-otp', { email });
+  return response.data;
+};
+
+export const forgotPassword = async (email: string) => {
+  const response = await axiosInstance.post('/auth/forgot-password', { email });
+  return response.data;
+};
+
+export const resetPassword = async (payload: ResetPasswordPayload) => {
+  const response = await axiosInstance.post('/auth/reset-password', payload);
   return response.data;
 };

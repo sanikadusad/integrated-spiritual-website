@@ -1,12 +1,16 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Input from '@/components/Input/Input';
+import { Eye, EyeOff } from 'lucide-react';
 import { loginUser } from './authService';
 import { useAuth } from '@/hooks/useAuth';
+import loginOrnament from '@/assets/login-ornament.png';
+import './LoginPage.css';
+import AuthVisualPanel from './AuthVisualPanel';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -41,21 +45,67 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="login-page">
+      
+      
+  <AuthVisualPanel
+    headline="Find your inner balance."
+    subtext="A space to pause, reflect, connect and grow."
+  />
 
-      <form onSubmit={handleSubmit}>
-        <Input label="Email" id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <Input label="Password" id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+      <div className="login-form-panel">
+        <h1 className="login-title">Welcome Back</h1>
+        <p className="login-subtitle">Continue your journey inward.</p>
 
-        {error && <p className="error-text">{error}</p>}
+        <form onSubmit={handleSubmit}>
+          <div className="login-field">
+            <label className="login-field-label" htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="Email address"
+              className="login-field-input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
 
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? 'Logging in...' : 'Login'}
-        </button>
-      </form>
+          <div className="login-field">
+            <label className="login-field-label" htmlFor="password">Password</label>
+            <div className="login-field-input-wrapper">
+              <input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Enter your password"
+                className="login-field-input"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <button
+                type="button"
+                className="login-field-eye-toggle"
+                onClick={() => setShowPassword((prev) => !prev)}
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
+            <Link to="/forgot-password" className="login-forgot-link">Forgot password?</Link>
+          </div>
 
-      <p>Don't have an account? <Link to="/register">Register</Link></p>
+          {error && <p className="error-text">{error}</p>}
+
+          <button type="submit" className="login-submit-btn" disabled={isSubmitting}>
+            {isSubmitting ? 'Signing in...' : 'Sign In'}
+          </button>
+        </form>
+
+        <div className="login-divider">or</div>
+
+        <p className="login-register-prompt">
+          Don't have an account? <Link to="/register">Create account</Link>
+        </p>
+      </div>
     </div>
   );
 };
