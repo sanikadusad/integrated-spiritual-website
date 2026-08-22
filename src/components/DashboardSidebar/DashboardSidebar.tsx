@@ -1,5 +1,5 @@
-import { NavLink } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { ChevronRight, LogOut } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
 import logo from '@/assets/logo.png';
@@ -22,7 +22,13 @@ interface DashboardSidebarProps {
 }
 
 const DashboardSidebar = ({ portalLabel, sections }: DashboardSidebarProps) => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   return (
     <aside className="dash-sidebar">
@@ -45,6 +51,11 @@ const DashboardSidebar = ({ portalLabel, sections }: DashboardSidebarProps) => {
           ))}
         </div>
       ))}
+
+      <button onClick={handleLogout} className="dash-sidebar-link dash-sidebar-logout-btn">
+        <LogOut size={20} />
+        <span>Logout</span>
+      </button>
 
       <NavLink to="/dashboard/profile" className="dash-sidebar-profile-footer">
         <div className="dash-sidebar-profile-avatar">{user?.name?.[0]?.toUpperCase()}</div>

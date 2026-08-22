@@ -89,3 +89,11 @@
     color: var(--color-text-muted);
   }
  
+  .dash-sidebar-logout-btn {
+    width: calc(100% - 32px);
+    margin: 0 var(--spacing-md);
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+  }
