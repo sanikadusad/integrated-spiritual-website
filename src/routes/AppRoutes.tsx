@@ -18,10 +18,21 @@ import ResetPasswordPage from '../features/auth/ResetPasswordPage';
 const AppRoutes = () => {
   return (
     <Routes>
-  <Route element={<MainLayout />}>
-    <Route path="/" element={<HomePage />} />
-    <Route path="/about" element={<AboutPage />} />
-
+    <Route element={<MainLayout />}>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Route>
+  
+    <Route path="/login" element={<LoginPage />} />
+    <Route path="/register" element={<RegisterPage />} />
+  
+    <Route element={<AuthLayout />}>
+      <Route path="/verify-email" element={<VerifyEmailPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
+    </Route>
+  
     <Route element={<ProtectedRoute />}>
       <Route path="/dashboard" element={<DashboardPage />} />
     </Route>
@@ -31,19 +42,7 @@ const AppRoutes = () => {
     <Route element={<ProtectedRoute allowedRoles={['mentor']} />}>
       <Route path="/mentor" element={<MentorDashboardPage />} />
     </Route>
-
-    <Route path="*" element={<NotFoundPage />} />
-  </Route>
-
-  <Route path="/login" element={<LoginPage />} />
-  <Route path="/register" element={<RegisterPage />} />
-  <Route element={<AuthLayout />}>
-    
-    <Route path="/verify-email" element={<VerifyEmailPage />} />
-    <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-    <Route path="/reset-password" element={<ResetPasswordPage />} />
-  </Route>
-</Routes>
+  </Routes>
 
     
   );
