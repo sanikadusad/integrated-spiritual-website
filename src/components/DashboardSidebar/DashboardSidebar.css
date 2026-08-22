@@ -47,4 +47,45 @@
     background-color: #ebd7b5;
   }
   
+  .dash-sidebar-profile-footer {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    margin: var(--spacing-lg) var(--spacing-md) 0;
+    padding: var(--spacing-sm);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--spacing-md);
+    color: var(--color-secondary);
+  }
+  
+  .dash-sidebar-profile-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  
+  .dash-sidebar-profile-info {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .dash-sidebar-profile-name {
+    font-size: 0.9rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .dash-sidebar-profile-link {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+  }
  

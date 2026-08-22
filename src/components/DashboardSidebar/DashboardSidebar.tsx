@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom';
+import { ChevronRight } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { useAuth } from '@/hooks/useAuth';
 import logo from '@/assets/logo.png';
 import './DashboardSidebar.css';
 
@@ -20,6 +22,8 @@ interface DashboardSidebarProps {
 }
 
 const DashboardSidebar = ({ portalLabel, sections }: DashboardSidebarProps) => {
+  const { user } = useAuth();
+
   return (
     <aside className="dash-sidebar">
       <img src={logo} alt="" className="dash-sidebar-logo" />
@@ -42,7 +46,14 @@ const DashboardSidebar = ({ portalLabel, sections }: DashboardSidebarProps) => {
         </div>
       ))}
 
-      
+      <NavLink to="/dashboard/profile" className="dash-sidebar-profile-footer">
+        <div className="dash-sidebar-profile-avatar">{user?.name?.[0]?.toUpperCase()}</div>
+        <div className="dash-sidebar-profile-info">
+          <p className="dash-sidebar-profile-name">{user?.name}</p>
+          <p className="dash-sidebar-profile-link">View Profile</p>
+        </div>
+        <ChevronRight size={16} />
+      </NavLink>
     </aside>
   );
 };
