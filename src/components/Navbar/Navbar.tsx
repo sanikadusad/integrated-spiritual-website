@@ -1,5 +1,6 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/hooks/useAuth';
+import { getDashboardPath } from '@/utils/roleRoutes';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -25,6 +26,9 @@ const Navbar = () => {
 
       {isAuthenticated ? (
         <>
+          <NavLink to={getDashboardPath(user!.role)} className={getLinkClass}>
+            Dashboard
+          </NavLink>
           <span className="navbar-greeting">Hi, {user?.name}</span>
           <button onClick={handleLogout} className="navbar-logout-btn">
             Logout

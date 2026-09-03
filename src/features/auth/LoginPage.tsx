@@ -3,9 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { loginUser } from './authService';
 import { useAuth } from '@/hooks/useAuth';
-import loginOrnament from '@/assets/login-ornament.png';
+
 import './LoginPage.css';
 import AuthVisualPanel from './AuthVisualPanel';
+import { getDashboardPath } from '@/utils/roleRoutes';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -31,7 +32,7 @@ const LoginPage = () => {
     try {
       const data = await loginUser({ email, password });
       login(data.user, data.token);
-      navigate('/');
+      navigate(getDashboardPath(data.user.role));
     } catch (err: any) {
       if (err.response?.data?.unverified) {
         navigate('/verify-email', { state: { email } });

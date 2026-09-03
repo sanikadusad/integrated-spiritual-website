@@ -39,7 +39,7 @@ const quickActions = [
 const AdminDashboardPage = () => {
   return (
     <div className="dash-layout">
-      <DashboardSidebar portalLabel="ADMIN PORTAL" sections={adminNavSections} />
+      <DashboardSidebar portalLabel="ADMIN PORTAL" sections={adminNavSections} homePath="/admin" />
 
       <main className="dash-main">
         <DashboardHeader

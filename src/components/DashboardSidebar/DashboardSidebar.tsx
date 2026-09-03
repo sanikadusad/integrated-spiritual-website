@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, Link, useNavigate } from 'react-router-dom';
 import { ChevronRight, LogOut } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { useAuth } from '@/hooks/useAuth';
@@ -19,9 +19,10 @@ interface NavSection {
 interface DashboardSidebarProps {
   portalLabel: string;
   sections: NavSection[];
+  homePath: string;
 }
 
-const DashboardSidebar = ({ portalLabel, sections }: DashboardSidebarProps) => {
+const DashboardSidebar = ({ portalLabel, sections, homePath }: DashboardSidebarProps) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
@@ -32,7 +33,9 @@ const DashboardSidebar = ({ portalLabel, sections }: DashboardSidebarProps) => {
 
   return (
     <aside className="dash-sidebar">
-      <img src={logo} alt="" className="dash-sidebar-logo" />
+      <Link to={homePath}>
+        <img src={logo} alt="" className="dash-sidebar-logo" />
+      </Link>
 
       {sections.map((section) => (
         <div key={section.title} className="dash-sidebar-section">

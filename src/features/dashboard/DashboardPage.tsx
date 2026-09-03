@@ -11,7 +11,7 @@ const DashboardPage = () => {
 
   return (
     <div className="dash-layout">
-      <DashboardSidebar portalLabel="MY SPACE" sections={userNavSections} />
+      <DashboardSidebar portalLabel="MY SPACE" sections={userNavSections} homePath="/dashboard" />
 
       <main className="dash-main">
         <DashboardHeader

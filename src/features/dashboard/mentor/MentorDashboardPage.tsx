@@ -35,7 +35,7 @@ const quickActions = [
 const MentorDashboardPage = () => {
   return (
     <div className="dash-layout">
-      <DashboardSidebar portalLabel="MENTOR PORTAL" sections={mentorNavSections} />
+      <DashboardSidebar portalLabel="MENTOR PORTAL" sections={mentorNavSections} homePath="/mentor" />
 
       <main className="dash-main">
         <DashboardHeader
