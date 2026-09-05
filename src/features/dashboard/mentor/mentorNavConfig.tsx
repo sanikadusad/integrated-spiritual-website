@@ -14,7 +14,7 @@ export const mentorNavSections = [
   {
     title: 'TEACHING',
     items: [
-      { label: 'My Courses', icon: BookOpen, path: '/mentor/courses' },
+      { label: 'My Courses', icon: BookOpen, path: '/mentor/my-courses' },
       { label: 'Resources', icon: StickyNote, path: '/mentor/resources' },
       { label: 'Student Progress', icon: BarChart3, path: '/mentor/progress' },
     ],

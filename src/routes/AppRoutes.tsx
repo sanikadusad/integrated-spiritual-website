@@ -16,7 +16,10 @@ import ResetPasswordPage from '../features/auth/ResetPasswordPage';
 import UploadMeditationPage from '../features/dashboard/mentor/UploadMeditationPage';
 import MeditationListPage from '../features/meditation/MeditationListPage';
 import MeditationPlayerPage from '../features/meditation/MeditationPlayerPage';
-
+import MyCoursesPage from '../features/dashboard/mentor/MyCoursesPage';
+import ManageLessonsPage from '../features/dashboard/mentor/ManageLessonsPage';
+import ManageCoursesPage from '../features/dashboard/admin/ManageCoursesPage';
+import CreateCoursePage from '../features/dashboard/admin/CreateCoursePage';
 
 const AppRoutes = () => {
   return (
@@ -43,10 +46,14 @@ const AppRoutes = () => {
     </Route>
     <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
       <Route path="/admin" element={<AdminDashboardPage />} />
+      <Route path="/admin/courses" element={<ManageCoursesPage />} />
+<Route path="/admin/courses/create" element={<CreateCoursePage />} />
     </Route>
     <Route element={<ProtectedRoute allowedRoles={['mentor']} />}>
       <Route path="/mentor" element={<MentorDashboardPage />} />
       <Route path="/mentor/upload-meditation" element={<UploadMeditationPage />} />
+      <Route path="/mentor/my-courses" element={<MyCoursesPage />} />
+      <Route path="/mentor/courses/:courseId/manage" element={<ManageLessonsPage />} />
     </Route>
   </Routes>
 
