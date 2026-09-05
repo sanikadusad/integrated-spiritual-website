@@ -14,6 +14,7 @@ import VerifyEmailPage from '../features/auth/VerifyEmailPage';
 import ForgotPasswordPage from '../features/auth/ForgotPasswordPage';
 import ResetPasswordPage from '../features/auth/ResetPasswordPage';
 import UploadMeditationPage from '../features/dashboard/mentor/UploadMeditationPage';
+import MeditationListPage from '../features/meditation/MeditationListPage';
 
 
 const AppRoutes = () => {
@@ -36,6 +37,7 @@ const AppRoutes = () => {
   
     <Route element={<ProtectedRoute />}>
       <Route path="/dashboard" element={<DashboardPage />} />
+      <Route path="/dashboard/meditation" element={<MeditationListPage />} />
     </Route>
     <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
       <Route path="/admin" element={<AdminDashboardPage />} />
