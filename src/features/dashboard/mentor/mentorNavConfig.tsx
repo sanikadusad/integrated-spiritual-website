@@ -8,6 +8,7 @@ export const mentorNavSections = [
       { label: 'My Sessions', icon: Calendar, path: '/mentor/sessions' },
       { label: 'My Students', icon: Users, path: '/mentor/students' },
       { label: 'Messages', icon: MessageSquare, path: '/mentor/messages' },
+      { label: 'Resources', icon: StickyNote, path: '/mentor/upload-meditation' },
     ],
   },
   {

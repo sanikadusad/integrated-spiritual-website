@@ -13,6 +13,7 @@ import NotFoundPage from '../pages/NotFoundPage';
 import VerifyEmailPage from '../features/auth/VerifyEmailPage';
 import ForgotPasswordPage from '../features/auth/ForgotPasswordPage';
 import ResetPasswordPage from '../features/auth/ResetPasswordPage';
+import UploadMeditationPage from '../features/dashboard/mentor/UploadMeditationPage';
 
 
 const AppRoutes = () => {
@@ -41,6 +42,7 @@ const AppRoutes = () => {
     </Route>
     <Route element={<ProtectedRoute allowedRoles={['mentor']} />}>
       <Route path="/mentor" element={<MentorDashboardPage />} />
+      <Route path="/mentor/upload-meditation" element={<UploadMeditationPage />} />
     </Route>
   </Routes>
 
