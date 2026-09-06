@@ -14,12 +14,18 @@ export interface Course {
 
 export interface Lesson {
   id: number;
-  course_id: number;
+  course_id?: number;
   title: string;
   content_type: 'video' | 'pdf';
-  content_url: string;
+  content_url?: string;
   position: number;
   duration_seconds: number | null;
+}
+
+export interface Mentor {
+  id: number;
+  name: string;
+  email: string;
 }
 
 export const getCourses = async (): Promise<Course[]> => {
@@ -30,11 +36,6 @@ export const getCourses = async (): Promise<Course[]> => {
 export const getCourseById = async (id: string): Promise<Course> => {
   const response = await axiosInstance.get(`/courses/${id}`);
   return response.data.course;
-};
-
-export const getLessons = async (courseId: string): Promise<Lesson[]> => {
-  const response = await axiosInstance.get(`/courses/${courseId}/lessons`);
-  return response.data.lessons;
 };
 
 export const createLesson = async (courseId: string, formData: FormData) => {
@@ -48,31 +49,46 @@ export const deleteLesson = async (courseId: string, lessonId: number) => {
   const response = await axiosInstance.delete(`/courses/${courseId}/lessons/${lessonId}`);
   return response.data;
 };
-export interface Mentor {
-    id: number;
-    name: string;
-    email: string;
-  }
-  
-  export const getMentors = async (): Promise<Mentor[]> => {
-    const response = await axiosInstance.get('/users/mentors');
-    return response.data.mentors;
-  };
-  
-  export const createCourse = async (payload: {
-    title: string;
-    description: string;
-    price: number;
-    mentorId: number | null;
-  }) => {
-    const response = await axiosInstance.post('/courses', payload);
-    return response.data;
-  };
-  
-  export const updateCourse = async (
-    id: number,
-    payload: Partial<{ title: string; description: string; price: number; mentorId: number; status: 'draft' | 'published' }>
-  ) => {
-    const response = await axiosInstance.patch(`/courses/${id}`, payload);
-    return response.data;
-  };
+
+export const getLessons = async (courseId: string): Promise<{ lessons: Lesson[]; locked: boolean }> => {
+  const response = await axiosInstance.get(`/courses/${courseId}/lessons`);
+  return { lessons: response.data.lessons, locked: response.data.locked };
+};
+
+export const getMentors = async (): Promise<Mentor[]> => {
+  const response = await axiosInstance.get('/users/mentors');
+  return response.data.mentors;
+};
+
+export const createCourse = async (payload: {
+  title: string;
+  description: string;
+  price: number;
+  mentorId: number | null;
+}) => {
+  const response = await axiosInstance.post('/courses', payload);
+  return response.data;
+};
+
+export const updateCourse = async (
+  id: number,
+  payload: Partial<{ title: string; description: string; price: number; mentorId: number; status: 'draft' | 'published' }>
+) => {
+  const response = await axiosInstance.patch(`/courses/${id}`, payload);
+  return response.data;
+};
+
+export const enrollInCourse = async (courseId: number) => {
+  const response = await axiosInstance.post(`/enrollments/${courseId}/enroll`);
+  return response.data;
+};
+
+export const getEnrollmentStatus = async (courseId: number): Promise<boolean> => {
+  const response = await axiosInstance.get(`/enrollments/${courseId}/enrollment-status`);
+  return response.data.enrolled;
+};
+
+export const getMyEnrolledCourses = async (): Promise<Course[]> => {
+  const response = await axiosInstance.get('/enrollments/my-courses');
+  return response.data.courses;
+};

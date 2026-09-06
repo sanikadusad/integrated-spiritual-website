@@ -20,7 +20,7 @@ const ManageLessonsPage = () => {
 
   const loadLessons = () => {
     if (!courseId) return;
-    getLessons(courseId).then(setLessons);
+    getLessons(courseId).then((data) => setLessons(data.lessons));
   };
 
   useEffect(() => {

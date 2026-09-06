@@ -20,6 +20,8 @@ import MyCoursesPage from '../features/dashboard/mentor/MyCoursesPage';
 import ManageLessonsPage from '../features/dashboard/mentor/ManageLessonsPage';
 import ManageCoursesPage from '../features/dashboard/admin/ManageCoursesPage';
 import CreateCoursePage from '../features/dashboard/admin/CreateCoursePage';
+import CourseListPage from '../features/courses/CourseListPage';
+import CourseDetailPage from '../features/courses/CourseDetailPage';
 
 const AppRoutes = () => {
   return (
@@ -43,6 +45,8 @@ const AppRoutes = () => {
       <Route path="/dashboard" element={<DashboardPage />} />
       <Route path="/dashboard/meditation" element={<MeditationListPage />} />
       <Route path="/dashboard/meditation/:id" element={<MeditationPlayerPage />} />
+      <Route path="/dashboard/courses" element={<CourseListPage />} />
+      <Route path="/dashboard/courses/:id" element={<CourseDetailPage />} />
     </Route>
     <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
       <Route path="/admin" element={<AdminDashboardPage />} />
