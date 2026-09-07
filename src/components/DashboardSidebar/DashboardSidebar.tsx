@@ -9,6 +9,7 @@ interface NavItem {
   label: string;
   icon: LucideIcon;
   path: string;
+  soon?: boolean;
 }
 
 interface NavSection {
@@ -50,6 +51,7 @@ const DashboardSidebar = ({ portalLabel, sections, homePath }: DashboardSidebarP
             >
               <item.icon size={20} />
               <span>{item.label}</span>
+              {item.soon && <span className="dash-sidebar-soon-badge">Soon</span>}
             </NavLink>
           ))}
         </div>

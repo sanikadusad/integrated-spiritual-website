@@ -22,6 +22,11 @@ import ManageCoursesPage from '../features/dashboard/admin/ManageCoursesPage';
 import CreateCoursePage from '../features/dashboard/admin/CreateCoursePage';
 import CourseListPage from '../features/courses/CourseListPage';
 import CourseDetailPage from '../features/courses/CourseDetailPage';
+import ComingSoonPage from '../components/ComingSoonPage/ComingSoonPage';
+import { userNavSections } from '../features/dashboard/userNavConfig';
+import { adminNavSections } from '../features/dashboard/admin/adminNavConfig';
+import { mentorNavSections } from '../features/dashboard/mentor/mentorNavConfig';
+import ProfilePage from '../features/dashboard/ProfilePage';
 
 const AppRoutes = () => {
   return (
@@ -47,17 +52,30 @@ const AppRoutes = () => {
       <Route path="/dashboard/meditation/:id" element={<MeditationPlayerPage />} />
       <Route path="/dashboard/courses" element={<CourseListPage />} />
       <Route path="/dashboard/courses/:id" element={<CourseDetailPage />} />
+      <Route path="/dashboard/profile" element={<ProfilePage />} />
+      <Route
+    path="/dashboard/*"
+    element={<ComingSoonPage portalLabel="MY SPACE" sections={userNavSections} homePath="/dashboard" title="Coming Soon" />}
+  />
     </Route>
     <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
       <Route path="/admin" element={<AdminDashboardPage />} />
       <Route path="/admin/courses" element={<ManageCoursesPage />} />
 <Route path="/admin/courses/create" element={<CreateCoursePage />} />
+<Route
+    path="/admin/*"
+    element={<ComingSoonPage portalLabel="ADMIN PORTAL" sections={adminNavSections} homePath="/admin" title="Coming Soon" />}
+  />
     </Route>
     <Route element={<ProtectedRoute allowedRoles={['mentor']} />}>
       <Route path="/mentor" element={<MentorDashboardPage />} />
       <Route path="/mentor/upload-meditation" element={<UploadMeditationPage />} />
       <Route path="/mentor/my-courses" element={<MyCoursesPage />} />
       <Route path="/mentor/courses/:courseId/manage" element={<ManageLessonsPage />} />
+      <Route
+    path="/mentor/*"
+    element={<ComingSoonPage portalLabel="MENTOR PORTAL" sections={mentorNavSections} homePath="/mentor" title="Coming Soon" />}
+  />
     </Route>
   </Routes>
 

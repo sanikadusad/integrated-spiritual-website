@@ -1,13 +1,26 @@
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Flower2, Sparkles, Flower, BookOpen } from 'lucide-react';
 import DashboardSidebar from '@/components/DashboardSidebar/DashboardSidebar';
 import DashboardHeader from '@/components/DashboardHeader/DashboardHeader';
 import DashStatCard from './DashStatCard';
 import { userNavSections } from './userNavConfig';
 import { useAuth } from '@/hooks/useAuth';
-import { Flower2, Sparkles, Flower } from 'lucide-react';
+import { getMeditationStats, type MeditationStats } from '@/features/meditation/meditationService';
+import { getMyEnrolledCourses, type Course } from '@/features/courses/courseService';
 import './DashboardPage.css';
 
 const DashboardPage = () => {
   const { user } = useAuth();
+  const [meditationStats, setMeditationStats] = useState<MeditationStats | null>(null);
+  const [enrolledCourses, setEnrolledCourses] = useState<Course[]>([]);
+
+  useEffect(() => {
+    getMeditationStats().then(setMeditationStats).catch(() => {});
+    getMyEnrolledCourses().then(setEnrolledCourses).catch(() => {});
+  }, []);
+
+  const mostRecentCourse = enrolledCourses[0];
 
   return (
     <div className="dash-layout">
@@ -20,51 +33,79 @@ const DashboardPage = () => {
         />
 
         <div className="dash-stats-grid">
-          <DashStatCard label="Today's Sadhana" value="4/5" meta="Tasks completed" />
-          <DashStatCard label="Meditation" value="12" meta="Sessions this month" />
-          <DashStatCard label="Learning Progress" value="72%" meta="current course" />
-          <DashStatCard label="Spiritual Streak" value="7 days" meta="keep going!" />
+          <DashStatCard
+            label="Meditation Sessions"
+            value={String(meditationStats?.sessionsPlayed ?? 0)}
+            meta={`${meditationStats?.sessionsCompleted ?? 0} completed`}
+          />
+          <DashStatCard
+            label="Bookmarked"
+            value={String(meditationStats?.bookmarkCount ?? 0)}
+            meta="saved meditations"
+          />
+          <DashStatCard
+            label="Enrolled Courses"
+            value={String(enrolledCourses.length)}
+            meta="active courses"
+          />
+          <DashStatCard label="Spiritual Streak" value="—" meta="coming soon" />
         </div>
 
         <div className="dash-widgets-grid">
           <div className="dash-widget-card">
             <h3 className="dash-widget-title">
-              <span className="dash-widget-icon-badge"><Flower size={16} /></span>
-              Today's Spiritual Practice
+              <span className="dash-widget-icon-badge"><Flower2 size={16} /></span>
+              Continue Meditation
             </h3>
-            <p className="dash-widget-subtext">Nurture your mind, body and soul.</p>
-            <ul className="dash-checklist">
-              <li>✓ Morning Prayer — Completed</li>
-              <li>✓ Reading — Completed</li>
-              <li>✓ Meditation — 10 min pending</li>
-              <li>○ Reflection — Pending</li>
-            </ul>
-            <button className="dash-widget-btn">Continue Sadhana →</button>
-          </div>
-
-          <div className="dash-widget-card">
-            <h3 className="dash-widget-title">Your Mood</h3>
-            <p className="dash-widget-value">Feeling Peaceful</p>
-            <p className="dash-widget-subtext">Today's overall mood</p>
-            <button className="dash-widget-btn">Track Mood →</button>
+            {meditationStats?.lastPlayed ? (
+              <>
+                <p className="dash-widget-value">{meditationStats.lastPlayed.title}</p>
+                <p className="dash-widget-subtext">
+                  {meditationStats.lastPlayed.completed ? 'Completed' : 'In progress'}
+                </p>
+                <Link
+                  to={`/dashboard/meditation/${meditationStats.lastPlayed.id}`}
+                  className="dash-widget-btn"
+                  style={{ display: 'inline-block', textDecoration: 'none' }}
+                >
+                  {meditationStats.lastPlayed.completed ? 'Play Again' : 'Resume'} →
+                </Link>
+              </>
+            ) : (
+              <>
+                <p className="dash-widget-subtext">You haven't started a meditation yet.</p>
+                <Link to="/dashboard/meditation" className="dash-widget-btn" style={{ display: 'inline-block', textDecoration: 'none' }}>
+                  Explore Meditations →
+                </Link>
+              </>
+            )}
           </div>
 
           <div className="dash-widget-card">
             <h3 className="dash-widget-title">
-              <span className="dash-widget-icon-badge"><Flower2 size={16} /></span>
-              Today's Meditation
+              <span className="dash-widget-icon-badge"><BookOpen size={16} /></span>
+              My Courses
             </h3>
-            <p className="dash-widget-meta">10 MINUTES</p>
-            <p className="dash-widget-value">Calm the Mind</p>
-            <p className="dash-widget-subtext">A guided meditation to bring peace and clarity.</p>
-            <button className="dash-widget-btn">Start Meditation →</button>
-          </div>
-
-          <div className="dash-widget-card">
-            <h3 className="dash-widget-title">Continue Learning</h3>
-            <p className="dash-widget-value">Mindfulness Basics</p>
-            <p className="dash-widget-subtext">Lesson 8 of 12 — 8/12 lessons completed</p>
-            <button className="dash-widget-btn">Continue Course →</button>
+            {mostRecentCourse ? (
+              <>
+                <p className="dash-widget-value">{mostRecentCourse.title}</p>
+                <p className="dash-widget-subtext">with {mostRecentCourse.mentor_name || 'TBD'}</p>
+                <Link
+                  to={`/dashboard/courses/${mostRecentCourse.id}`}
+                  className="dash-widget-btn"
+                  style={{ display: 'inline-block', textDecoration: 'none' }}
+                >
+                  Continue Course →
+                </Link>
+              </>
+            ) : (
+              <>
+                <p className="dash-widget-subtext">You haven't enrolled in any courses yet.</p>
+                <Link to="/dashboard/courses" className="dash-widget-btn" style={{ display: 'inline-block', textDecoration: 'none' }}>
+                  Browse Courses →
+                </Link>
+              </>
+            )}
           </div>
 
           <div className="dash-widget-card">
@@ -73,48 +114,9 @@ const DashboardPage = () => {
               AI Guide
             </h3>
             <p className="dash-widget-subtext">
-              You've been showing great consistency in your practice. A short evening meditation can help you maintain your inner balance.
+              Personalized recommendations are coming in a later phase.
             </p>
-            <button className="dash-widget-btn">Ask AI Guide →</button>
           </div>
-
-          <div className="dash-widget-card">
-            <div className="dash-widget-header-row">
-              <h3 className="dash-widget-title">Upcoming Events</h3>
-              <a href="#" className="dash-widget-link">View Calendar →</a>
-            </div>
-
-            <div className="dash-event-row">
-              <div className="dash-event-date">
-                <span>MAY</span>
-                <strong>24</strong>
-              </div>
-              <div className="dash-event-info">
-                <p className="dash-event-title">Meditation Retreat</p>
-                <p className="dash-event-meta">5:00 PM · Online</p>
-              </div>
-              <button className="dash-event-register-btn">Register</button>
-            </div>
-
-            <div className="dash-event-row">
-              <div className="dash-event-date">
-                <span>MAY</span>
-                <strong>31</strong>
-              </div>
-              <div className="dash-event-info">
-                <p className="dash-event-title">Inner Peace Workshop</p>
-                <p className="dash-event-meta">11:00 AM · Online</p>
-              </div>
-              <button className="dash-event-register-btn">Register</button>
-            </div>
-          </div>
-        </div>
-
-        <div className="dash-quote-card">
-          <p className="dash-quote-label">A thought for today</p>
-          <p className="dash-quote-text">"Peace comes from within."</p>
-          <p className="dash-quote-hint">Take a moment to reflect.</p>
-          <button className="dash-widget-btn">Begin Reflection →</button>
         </div>
       </main>
     </div>

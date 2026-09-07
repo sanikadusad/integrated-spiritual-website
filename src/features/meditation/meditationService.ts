@@ -70,3 +70,21 @@ export const toggleBookmark = async (meditationId: string): Promise<boolean> => 
   const response = await axiosInstance.post(`/meditation/${meditationId}/bookmark`);
   return response.data.bookmarked;
 };
+
+export interface MeditationStats {
+  sessionsPlayed: number;
+  sessionsCompleted: number;
+  bookmarkCount: number;
+  lastPlayed: {
+    id: number;
+    title: string;
+    media_type: 'audio' | 'video';
+    progress_seconds: number;
+    completed: boolean;
+  } | null;
+}
+
+export const getMeditationStats = async (): Promise<MeditationStats> => {
+  const response = await axiosInstance.get('/meditation/stats/me');
+  return response.data;
+};
