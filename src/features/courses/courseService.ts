@@ -28,8 +28,8 @@ export interface Mentor {
   email: string;
 }
 
-export const getCourses = async (): Promise<Course[]> => {
-  const response = await axiosInstance.get('/courses');
+export const getCourses = async (status?: string): Promise<Course[]> => {
+  const response = await axiosInstance.get('/courses', { params: status ? { status } : {} });
   return response.data.courses;
 };
 
@@ -72,7 +72,7 @@ export const createCourse = async (payload: {
 
 export const updateCourse = async (
   id: number,
-  payload: Partial<{ title: string; description: string; price: number; mentorId: number; status: 'draft' | 'published' }>
+  payload: Partial<{ title: string; description: string; price: number; mentorId: number; status: 'draft' | 'published'| 'cancelled' }>
 ) => {
   const response = await axiosInstance.patch(`/courses/${id}`, payload);
   return response.data;
@@ -92,3 +92,4 @@ export const getMyEnrolledCourses = async (): Promise<Course[]> => {
   const response = await axiosInstance.get('/enrollments/my-courses');
   return response.data.courses;
 };
+

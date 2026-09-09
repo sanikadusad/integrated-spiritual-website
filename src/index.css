@@ -49,3 +49,11 @@ button {
   font-family: inherit;
   cursor: pointer;
 }
+.loading-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
