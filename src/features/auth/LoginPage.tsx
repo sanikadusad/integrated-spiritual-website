@@ -33,7 +33,9 @@ const LoginPage = () => {
       const data = await loginUser({ email, password });
       login(data.user, data.token);
       navigate(getDashboardPath(data.user.role));
-    } catch (err: any) {
+    } // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    catch (err: any) {
       if (err.response?.data?.unverified) {
         navigate('/verify-email', { state: { email } });
         return;

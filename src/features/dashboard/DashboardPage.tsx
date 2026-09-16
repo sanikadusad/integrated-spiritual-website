@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Flower2, Sparkles, Flower, BookOpen } from 'lucide-react';
+import { Flower2, Sparkles, BookOpen } from 'lucide-react';
 import DashboardSidebar from '@/components/DashboardSidebar/DashboardSidebar';
 import DashboardHeader from '@/components/DashboardHeader/DashboardHeader';
 import DashStatCard from './DashStatCard';

@@ -23,7 +23,7 @@ interface DashboardSidebarProps {
   homePath: string;
 }
 
-const DashboardSidebar = ({ portalLabel, sections, homePath }: DashboardSidebarProps) => {
+const DashboardSidebar = ({ sections, homePath }: DashboardSidebarProps) => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 

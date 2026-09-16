@@ -27,6 +27,7 @@ const ManageLessonsPage = () => {
     if (!courseId) return;
     getCourseById(courseId).then(setCourse);
     loadLessons();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [courseId]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -53,7 +54,9 @@ const ManageLessonsPage = () => {
       setTitle('');
       setFile(null);
       loadLessons();
-    } catch (err: any) {
+    } // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    catch (err: any) {
       setError(err.response?.data?.error || 'Failed to add lesson.');
     } finally {
       setIsSubmitting(false);
