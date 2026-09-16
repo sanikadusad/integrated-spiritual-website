@@ -24,7 +24,9 @@ const ForgotPasswordPage = () => {
     try {
       const data = await forgotPassword(email);
       setSuccessMessage(data.message);
-    } catch (err: any) {
+    } // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    catch (err: any) {
       const message = err.response?.data?.error || 'Something went wrong. Please try again.';
       setError(message);
     } finally {

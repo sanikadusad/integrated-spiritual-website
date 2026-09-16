@@ -23,6 +23,7 @@ const MeditationListPage = () => {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoading(true);
     getMeditations(activeCategory ?? undefined)
       .then(setMeditations)

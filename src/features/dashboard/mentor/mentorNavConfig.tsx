@@ -1,4 +1,4 @@
-import { Home, Calendar, Users, MessageSquare, BookOpen, StickyNote, BarChart3, MessagesSquare, Megaphone, Settings } from 'lucide-react';
+import { Home, Calendar, CalendarCheck, Users, MessageSquare, BookOpen, StickyNote, BarChart3, MessagesSquare, Megaphone, Settings, HeartHandshake } from 'lucide-react';
 
 export const mentorNavSections = [
   {
@@ -8,7 +8,7 @@ export const mentorNavSections = [
       { label: 'My Sessions', icon: Calendar, path: '/mentor/sessions' },
       { label: 'My Students', icon: Users, path: '/mentor/students' },
       { label: 'Messages', icon: MessageSquare, path: '/mentor/messages' },
-      { label: 'Resources', icon: StickyNote, path: '/mentor/upload-meditation' },
+      { label: 'Meditation Upload', icon: StickyNote, path: '/mentor/upload-meditation' },
     ],
   },
   {
@@ -22,7 +22,11 @@ export const mentorNavSections = [
   {
     title: 'COMMUNITY',
     items: [
-      { label: 'Community', icon: MessagesSquare, path: '/mentor/community' },
+      { label: 'Events', icon: Calendar, path: '/events' },
+      { label: 'My Events', icon: CalendarCheck, path: '/my-events' },
+      { label: 'Volunteering', icon: HeartHandshake, path: '/volunteering' },
+      { label: 'My Volunteering', icon: HeartHandshake, path: '/my-volunteering' },
+      { label: 'Community', icon: MessagesSquare, path: '/community' },
       { label: 'Announcements', icon: Megaphone, path: '/mentor/announcements' },
     ],
   },

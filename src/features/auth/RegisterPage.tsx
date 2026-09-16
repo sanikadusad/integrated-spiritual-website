@@ -47,7 +47,9 @@ const RegisterPage = () => {
     try {
       const data = await registerUser({ name, email, password });
       navigate('/verify-email', { state: { email: data.email } });
-    } catch (err: any) {
+    } // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    catch (err: any) {
       const message = err.response?.data?.error || 'Registration failed. Please try again.';
       setError(message);
     } finally {

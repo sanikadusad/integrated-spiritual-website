@@ -1,4 +1,4 @@
-import { Home, UserPen, Flower2, LayoutGrid, Smile, BookOpen, Users, Calendar, HandHeart, HeartHandshake, Sparkles, UserCog, Settings } from 'lucide-react';
+import { Home, UserPen, Flower2, LayoutGrid, Smile, BookOpen, Users, Calendar, CalendarCheck, HandHeart, HeartHandshake, Sparkles, UserCog, Settings } from 'lucide-react';
 
 export const userNavSections = [
   {
@@ -23,15 +23,17 @@ export const userNavSections = [
   {
     title: 'CONNECT',
     items: [
-      { label: 'Community', icon: Users, path: '/dashboard/community', soon: true },
-      { label: 'Events', icon: Calendar, path: '/dashboard/events', soon: true },
+      { label: 'Community', icon: Users, path: '/community' },
+      { label: 'Events', icon: Calendar, path: '/events' },
+      { label: 'My Events', icon: CalendarCheck, path: '/my-events' },
     ],
   },
   {
     title: 'GIVING',
     items: [
       { label: 'Donations', icon: HandHeart, path: '/dashboard/donations', soon: true },
-      { label: 'Volunteer', icon: HeartHandshake, path: '/dashboard/volunteer', soon: true },
+      { label: 'Volunteering', icon: HeartHandshake, path: '/volunteering' },
+      { label: 'My Volunteering', icon: HeartHandshake, path: '/my-volunteering' },
     ],
   },
   {

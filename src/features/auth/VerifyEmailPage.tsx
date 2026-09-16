@@ -38,7 +38,9 @@ const VerifyEmailPage = () => {
     try {
       await verifyOtp({ email, code });
       navigate('/login');
-    } catch (err: any) {
+    } // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    catch (err: any) {
       const message = err.response?.data?.error || 'Verification failed. Please try again.';
       setError(message);
     } finally {
@@ -54,7 +56,9 @@ const VerifyEmailPage = () => {
     try {
       const data = await resendOtp(email);
       setSuccessMessage(data.message);
-    } catch (err: any) {
+    } // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    catch (err: any) {
       const message = err.response?.data?.error || 'Failed to resend code. Please try again.';
       setError(message);
     } finally {

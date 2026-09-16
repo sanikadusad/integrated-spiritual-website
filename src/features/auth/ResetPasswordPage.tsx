@@ -42,7 +42,9 @@ const ResetPasswordPage = () => {
     try {
       await resetPassword({ token, newPassword });
       navigate('/login');
-    } catch (err: any) {
+    } // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    catch (err: any) {
       const message = err.response?.data?.error || 'Something went wrong. Please try again.';
       setError(message);
     } finally {

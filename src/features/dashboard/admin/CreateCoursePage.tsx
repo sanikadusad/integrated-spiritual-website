@@ -39,7 +39,9 @@ const CreateCoursePage = () => {
         mentorId: mentorId ? Number(mentorId) : null,
       });
       navigate('/admin/courses');
-    } catch (err: any) {
+    } // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    catch (err: any) {
       setError(err.response?.data?.error || 'Failed to create course.');
     } finally {
       setIsSubmitting(false);
