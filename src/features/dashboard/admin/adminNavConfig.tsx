@@ -14,6 +14,7 @@ export const adminNavSections = [
       { label: 'Events', icon: Calendar, path: '/admin/events' },
       { label: 'Donations', icon: HandHeart, path: '/admin/donations' },
       { label: 'Community', icon: MessagesSquare, path: '/admin/community' },
+      { label: 'Shop', icon: MessagesSquare, path: '/admin/shop' },
     ],
   },
   {

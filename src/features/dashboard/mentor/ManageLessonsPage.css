@@ -28,3 +28,14 @@
     border: none;
     color: var(--color-error);
   }
+
+  .lesson-row-clickable {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+  
+  .lesson-row-clickable:hover {
+    background-color: #f7f1e6;
+  }

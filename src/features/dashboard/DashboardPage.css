@@ -1,14 +1,16 @@
 .dash-layout {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
   background-color: #f7f1e6;
+  overflow: hidden;
 }
 
 .dash-main {
   flex: 1;
+  height: 100vh;
+  overflow-y: auto;
   padding: var(--spacing-xl);
 }
-
 .dash-stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));

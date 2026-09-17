@@ -60,13 +60,10 @@ export const getMentors = async (): Promise<Mentor[]> => {
   return response.data.mentors;
 };
 
-export const createCourse = async (payload: {
-  title: string;
-  description: string;
-  price: number;
-  mentorId: number | null;
-}) => {
-  const response = await axiosInstance.post('/courses', payload);
+export const createCourse = async (formData: FormData) => {
+  const response = await axiosInstance.post('/courses', formData, {
+    headers: { 'Content-Type': undefined },
+  });
   return response.data;
 };
 

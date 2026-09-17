@@ -24,7 +24,7 @@ const MeditationListPage = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    getMeditations(activeCategory ?? undefined)
+    getMeditations({ categoryId: activeCategory ?? undefined })
       .then(setMeditations)
       .finally(() => setIsLoading(false));
   }, [activeCategory]);

@@ -13,6 +13,7 @@ const CreateCoursePage = () => {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [mentorId, setMentorId] = useState('');
+  const [thumbnail, setThumbnail] = useState<File | null>(null);
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -32,12 +33,14 @@ const CreateCoursePage = () => {
     setIsSubmitting(true);
 
     try {
-      await createCourse({
-        title,
-        description,
-        price: Number(price) || 0,
-        mentorId: mentorId ? Number(mentorId) : null,
-      });
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('description', description);
+      formData.append('price', price || '0');
+      if (mentorId) formData.append('mentorId', mentorId);
+      if (thumbnail) formData.append('thumbnail', thumbnail);
+
+      await createCourse(formData);
       navigate('/admin/courses');
     } catch (err: any) {
       setError(err.response?.data?.error || 'Failed to create course.');
@@ -81,6 +84,11 @@ const CreateCoursePage = () => {
                 ))}
               </select>
             </div>
+          </div>
+
+          <div className="upload-field">
+            <label>Course Thumbnail</label>
+            <input type="file" accept="image/*" onChange={(e) => setThumbnail(e.target.files ? e.target.files[0] : null)} />
           </div>
 
           {error && <p className="error-text">{error}</p>}

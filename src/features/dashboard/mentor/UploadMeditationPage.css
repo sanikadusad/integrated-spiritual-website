@@ -33,3 +33,18 @@
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-md);
   }
+
+  .upload-preview-card {
+    max-width: 600px;
+    margin-top: var(--spacing-xl);
+    background-color: #fffdf8;
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+    padding: var(--spacing-lg);
+  }
+  
+  .upload-preview-media {
+    width: 100%;
+    border-radius: 10px;
+    margin-top: var(--spacing-sm);
+  }

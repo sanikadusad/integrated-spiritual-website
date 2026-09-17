@@ -29,10 +29,8 @@ export const getCategories = async (): Promise<MeditationCategory[]> => {
   return response.data.categories;
 };
 
-export const getMeditations = async (categoryId?: number): Promise<Meditation[]> => {
-  const response = await axiosInstance.get('/meditation', {
-    params: categoryId ? { categoryId } : {},
-  });
+export const getMeditations = async (options?: { categoryId?: number; courseId?: number; scope?: 'general' }): Promise<Meditation[]> => {
+  const response = await axiosInstance.get('/meditation', { params: options || {} });
   return response.data.meditations;
 };
 

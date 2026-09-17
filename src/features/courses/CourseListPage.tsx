@@ -29,6 +29,11 @@ const CourseListPage = () => {
           <div className="course-grid">
             {courses.map((course) => (
               <Link key={course.id} to={`/dashboard/courses/${course.id}`} className="course-card">
+                {course.thumbnail_url ? (
+    <img src={course.thumbnail_url} alt={course.title} className="shop-card-image" />
+  ) : (
+    <div className="shop-card-image-placeholder">No image</div>
+  )}
                 <h3 className="course-card-title">{course.title}</h3>
                 <p className="course-card-mentor">with {course.mentor_name || 'TBD'}</p>
                 <p className="course-card-desc">{course.description}</p>

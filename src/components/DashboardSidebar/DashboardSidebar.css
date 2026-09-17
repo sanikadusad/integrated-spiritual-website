@@ -1,11 +1,11 @@
 .dash-sidebar {
   width: 240px;
-  min-height: 100vh;
+  height: 100vh;
   background-color: #efe4cf;
   padding: var(--spacing-lg) 0 var(--spacing-xl);
   flex-shrink: 0;
   overflow-y: auto;
-  }
+}
   
   .dash-sidebar-logo {
     width: 109px;

@@ -1,9 +1,11 @@
+import { useState, useEffect } from 'react';
 import { Calendar as CalendarIcon, ArrowRight } from 'lucide-react';
 import DashboardSidebar from '@/components/DashboardSidebar/DashboardSidebar';
 import DashboardHeader from '@/components/DashboardHeader/DashboardHeader';
 import DashStatCard from '../DashStatCard';
 import { mentorNavSections } from './mentorNavConfig';
 import './MentorDashboardPage.css';
+import { getMentorStats, type MentorStats } from '../statsService';
 
 const progressMetrics = [
   { label: 'Mindfulness', value: 85 },
@@ -33,6 +35,11 @@ const quickActions = [
 ];
 
 const MentorDashboardPage = () => {
+  const [stats, setStats] = useState<MentorStats | null>(null);
+
+  useEffect(() => {
+    getMentorStats().then(setStats).catch(() => {});
+  }, []);
   return (
     <div className="dash-layout">
       <DashboardSidebar portalLabel="MENTOR PORTAL" sections={mentorNavSections} homePath="/mentor" />
@@ -43,12 +50,12 @@ const MentorDashboardPage = () => {
           subtitle="Here's what's happening with your learners today."
         />
 
-        <div className="dash-stats-grid">
-          <DashStatCard label="Students" value="28" meta="+12% this month" />
-          <DashStatCard label="Upcoming Sessions" value="8" meta="Next: Today, 8:00pm" />
-          <DashStatCard label="Active Courses" value="6" meta="3 currently teaching" />
-          <DashStatCard label="Average Progress" value="82%" meta="+7% this month" />
-        </div>
+<div className="dash-stats-grid">
+  <DashStatCard label="Students" value={String(stats?.totalStudents ?? 0)} meta="across your courses" />
+  <DashStatCard label="Active Courses" value={String(stats?.activeCourses ?? 0)} meta={`${stats?.totalCourses ?? 0} total`} />
+  <DashStatCard label="Upcoming Sessions" value="—" meta="Coming soon" />
+  <DashStatCard label="Average Progress" value="—" meta="Coming soon" />
+</div>
 
         <div className="mentor-row">
           <div className="admin-widget-card mentor-progress-card">
@@ -101,16 +108,19 @@ const MentorDashboardPage = () => {
               <a href="#" className="dash-widget-link">View All →</a>
             </div>
             <ul className="admin-activity-list">
-              {activities.map((activity) => (
-                <li key={activity.title} className="admin-activity-row">
-                  <div className="admin-activity-info">
-                    <p className="admin-activity-text">{activity.title}</p>
-                    <p className="admin-activity-meta">{activity.meta}</p>
-                  </div>
-                  <span className="admin-activity-time">{activity.time}</span>
-                </li>
-              ))}
-            </ul>
+  {(stats?.recentActivity ?? []).map((activity, index) => (
+    <li key={index} className="admin-activity-row">
+      <div className="admin-activity-info">
+        <p className="admin-activity-text">New enrollment</p>
+        <p className="admin-activity-meta">{activity.name} enrolled in {activity.title}</p>
+      </div>
+      <span className="admin-activity-time">{new Date(activity.purchased_at).toLocaleDateString()}</span>
+    </li>
+  ))}
+  {(!stats || stats.recentActivity.length === 0) && (
+    <p className="admin-widget-subtext">No recent activity yet.</p>
+  )}
+</ul>
           </div>
 
           <div className="admin-widget-card">

@@ -27,6 +27,13 @@ import { userNavSections } from '../features/dashboard/userNavConfig';
 import { adminNavSections } from '../features/dashboard/admin/adminNavConfig';
 import { mentorNavSections } from '../features/dashboard/mentor/mentorNavConfig';
 import ProfilePage from '../features/dashboard/ProfilePage';
+import CreateProductPage from '../features/dashboard/admin/CreateProductPage';
+import ManageProductsPage from '../features/dashboard/admin/ManageProductsPage';
+import ShopPage from '../features/shop/ShopPage';
+import CartPage from '../features/shop/CartPage';
+import OrderHistoryPage from '../features/shop/OrderHistoryPage';
+import ProductDetailPage from '../features/shop/ProductDetailPage';
+
 
 const AppRoutes = () => {
   return (
@@ -53,6 +60,10 @@ const AppRoutes = () => {
       <Route path="/dashboard/courses" element={<CourseListPage />} />
       <Route path="/dashboard/courses/:id" element={<CourseDetailPage />} />
       <Route path="/dashboard/profile" element={<ProfilePage />} />
+      <Route path="/dashboard/shop" element={<ShopPage />} />
+<Route path="/dashboard/cart" element={<CartPage />} />
+<Route path="/dashboard/orders" element={<OrderHistoryPage />} />
+<Route path="/dashboard/shop/:id" element={<ProductDetailPage />} />
       <Route
     path="/dashboard/*"
     element={<ComingSoonPage portalLabel="MY SPACE" sections={userNavSections} homePath="/dashboard" title="Coming Soon" />}
@@ -62,6 +73,8 @@ const AppRoutes = () => {
       <Route path="/admin" element={<AdminDashboardPage />} />
       <Route path="/admin/courses" element={<ManageCoursesPage />} />
 <Route path="/admin/courses/create" element={<CreateCoursePage />} />
+<Route path="/admin/shop" element={<ManageProductsPage />} />
+<Route path="/admin/shop/create" element={<CreateProductPage />} />
 <Route
     path="/admin/*"
     element={<ComingSoonPage portalLabel="ADMIN PORTAL" sections={adminNavSections} homePath="/admin" title="Coming Soon" />}
