@@ -1,4 +1,4 @@
-import { Home, Users, FileText, BookOpen, Calendar, HandHeart, MessagesSquare, Sparkles, BarChart3, Bell, LifeBuoy, Settings } from 'lucide-react';
+import { Home, Users, FileText, BookOpen, Calendar, HandHeart, MessagesSquare, Sparkles, BarChart3, Bell, LifeBuoy, Settings, Flower2, ShoppingBag } from 'lucide-react';
 
 export const adminNavSections = [
   {
@@ -11,10 +11,11 @@ export const adminNavSections = [
       { label: 'Users', icon: Users, path: '/admin/users' },
       { label: 'Contents', icon: FileText, path: '/admin/contents' },
       { label: 'Courses', icon: BookOpen, path: '/admin/courses' },
+      { label: 'Upload Meditation', icon: Flower2, path: '/admin/meditation/upload' },
       { label: 'Events', icon: Calendar, path: '/admin/events' },
       { label: 'Donations', icon: HandHeart, path: '/admin/donations' },
       { label: 'Community', icon: MessagesSquare, path: '/admin/community' },
-      { label: 'Shop', icon: MessagesSquare, path: '/admin/shop' },
+      { label: 'Shop', icon: ShoppingBag, path: '/admin/shop' },
     ],
   },
   {

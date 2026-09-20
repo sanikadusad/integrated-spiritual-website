@@ -33,6 +33,8 @@ import ShopPage from '../features/shop/ShopPage';
 import CartPage from '../features/shop/CartPage';
 import OrderHistoryPage from '../features/shop/OrderHistoryPage';
 import ProductDetailPage from '../features/shop/ProductDetailPage';
+import AdminUploadMeditationPage from '../features/dashboard/admin/UploadMeditationPage';
+
 
 
 const AppRoutes = () => {
@@ -64,6 +66,7 @@ const AppRoutes = () => {
 <Route path="/dashboard/cart" element={<CartPage />} />
 <Route path="/dashboard/orders" element={<OrderHistoryPage />} />
 <Route path="/dashboard/shop/:id" element={<ProductDetailPage />} />
+
       <Route
     path="/dashboard/*"
     element={<ComingSoonPage portalLabel="MY SPACE" sections={userNavSections} homePath="/dashboard" title="Coming Soon" />}
@@ -75,6 +78,7 @@ const AppRoutes = () => {
 <Route path="/admin/courses/create" element={<CreateCoursePage />} />
 <Route path="/admin/shop" element={<ManageProductsPage />} />
 <Route path="/admin/shop/create" element={<CreateProductPage />} />
+<Route path="/admin/meditation/upload" element={<AdminUploadMeditationPage />} />
 <Route
     path="/admin/*"
     element={<ComingSoonPage portalLabel="ADMIN PORTAL" sections={adminNavSections} homePath="/admin" title="Coming Soon" />}

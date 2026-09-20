@@ -12,16 +12,32 @@ export interface Meditation {
   description: string;
   category_id: number | null;
   category_name: string | null;
+  course_id?: number | null;
+  course_title?: string | null;
   media_type: 'audio' | 'video';
-  media_url: string;
+  media_url: string | null;
   thumbnail_url: string | null;
   duration_seconds: number;
   created_at: string;
+  locked?: boolean;
 }
 
 export interface MeditationProgress {
   progress_seconds: number;
   completed: boolean;
+}
+
+export interface MeditationStats {
+  sessionsPlayed: number;
+  sessionsCompleted: number;
+  bookmarkCount: number;
+  lastPlayed: {
+    id: number;
+    title: string;
+    media_type: 'audio' | 'video';
+    progress_seconds: number;
+    completed: boolean;
+  } | null;
 }
 
 export const getCategories = async (): Promise<MeditationCategory[]> => {
@@ -68,19 +84,6 @@ export const toggleBookmark = async (meditationId: string): Promise<boolean> => 
   const response = await axiosInstance.post(`/meditation/${meditationId}/bookmark`);
   return response.data.bookmarked;
 };
-
-export interface MeditationStats {
-  sessionsPlayed: number;
-  sessionsCompleted: number;
-  bookmarkCount: number;
-  lastPlayed: {
-    id: number;
-    title: string;
-    media_type: 'audio' | 'video';
-    progress_seconds: number;
-    completed: boolean;
-  } | null;
-}
 
 export const getMeditationStats = async (): Promise<MeditationStats> => {
   const response = await axiosInstance.get('/meditation/stats/me');
